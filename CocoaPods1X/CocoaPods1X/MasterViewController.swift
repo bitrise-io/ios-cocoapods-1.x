@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Alamofire
 
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
@@ -25,6 +26,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+        }
+        
+        Alamofire.request(.GET, "https://httpbin.org/get")
+            .validate()
+            .responseJSON { response in
+                debugPrint(response)
         }
     }
 

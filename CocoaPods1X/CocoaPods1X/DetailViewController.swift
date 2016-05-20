@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class DetailViewController: UIViewController {
 
@@ -17,6 +18,16 @@ class DetailViewController: UIViewController {
         didSet {
             // Update the view.
             self.configureView()
+        }
+    }
+    
+    @IBAction func testButtonTouch(sender: AnyObject) {
+        debugPrint("-- TEST button")
+        
+        Alamofire.request(.GET, "https://httpbin.org/get")
+            .validate()
+            .responseJSON { response in
+                debugPrint(response)
         }
     }
 
